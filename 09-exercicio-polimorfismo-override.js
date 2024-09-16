@@ -20,7 +20,7 @@ class Carros {
   }
 }
 
-// Classe Guerreiro que herda de Carros
+
 class BMW extends Carros {
   constructor(marca, modelo, velocidade, cambio, cor, vidro, teto) {
     super(marca, modelo, velocidade, cambio, cor);
@@ -38,7 +38,6 @@ class BMW extends Carros {
   }
 }
 
-// Classe Honda que herda de Carros
 
 class Honda extends Carros {
   constructor(marca, modelo, velocidade, cambio, cor, ano, motor) {
@@ -57,11 +56,10 @@ class Honda extends Carros {
   }
 }
 
-//Criando instancias de Guerreiro, Honda e Arqueiro
 const bmw = new BMW ("BMW", "m3", 200, "automatico", "temperado", "tem teto")
-bmw.velocidadeMaxima(); //Saída: Arthur ataca com a espada!
-bmw.tempoChegada(10); //Saída: Arthur recebeu 20 de dano. Vida restante: 80
+bmw.velocidadeMaxima(); 
+bmw.tempoChegada(10); 
 
 const honda = new Honda("Honda", "Civic", 180, "automatico", "2023", "v8");
-honda.velocidadeMaxima(); //Saída: Merlin lança bola de fogo!
-honda.tempoChegada(15); // Saída: Merlin recebeu 15 de dano. Vida restante: 65
+honda.velocidadeMaxima(); 
+honda.tempoChegada(15); 
