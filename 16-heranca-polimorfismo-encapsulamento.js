@@ -65,7 +65,7 @@ defesa() {
     console.log(`${this.#nome} se defendeu com ${this.#nivel * 2} pontos de defesa!`);
 }
 
-receber(dano) {
+receberDano(dano) {
     this.#vida -= dano;
     console.log(`${this.#nome} recebeu ${dano} de dano! Vida restante: ${this.#vida}`);
     }
@@ -86,3 +86,58 @@ class Assassino extends Personagem {
         console.log(`${this.nome} usa sua furtividade de nivel ${this.furtividade} para se esconder!`);
     }
 }
+// Classe derivada - paladino
+class Paladino extends Personagem {
+    constructor(nome, nivel, vida, mana, fe) {
+        super(nome, "Paladino", nivel, vida, mana);
+        this.fe = fe;
+    }
+
+    // Sobrescrevendo o método defesa
+    defesa() {
+        console.log(`${this.nome} se defendeu com escudo sagrado, absorvendo mais dano com base na fé ${this.fe}!`);
+    }
+
+    // Método especifico
+    curar() {
+        console.log(`${this.nome} usa sua fé para curar a si mesmo ou aliados!`);
+    }
+}
+//Classe derivada - Mecanico
+
+class Mecanico extends Personagem {
+    constructor(nome, nivel, vida, mana, engenharia) {
+        super(nome, "Mecanico", nivel, vida, mana);
+        this.engenharia = engenharia;
+    }
+
+    // Sobrescrevendo o método receberDano
+    receberDano(dano) {
+        const danoReduzido = dano - this.engenharia;
+        super.receberDano(danoReduzido);
+        console.log(`${this.nome} usou sua engenharia para reduzir o dano em ${this.engenharia}.`);
+    }
+
+    //Método específico
+    contruirTorre(){
+        console.log(`${this.nome} contruiu uma torre defensiva!`);
+    }
+}
+
+// Criando instancia da ckasse derivada Assassino
+const assassino = new Assassino ("Luna Sombria", 10, 100, 50, 8);
+//Chamando os métodos
+assassino.atacar(); // Método sobrescritor
+assassino.usarFurtividade(); // Método específico
+
+//Criando instancia da classe derivada Paladino
+const paladino = new Paladino ("Sir Lancelot", 12, 120, 70, 15);
+// Chamando os métodos
+paladino.defesa(); //Método sobrescrito
+paladino.curar(); //Método específico
+
+//criando instancia da classe derivada Mecanico
+const mecanico = new Mecanico("Roberto das Engrenagens", 8, 90, 40, 5);
+//Chamando os métodos
+mecanico.receberDano(30); // Método sobrescrito
+mecanico.contruirTorre(); // Método especifico
