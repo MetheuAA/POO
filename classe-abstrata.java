@@ -13,7 +13,7 @@ abstract class Personagem {
 }
 // Classe derivada "Guerreiro"
 class Guerreiro extends Personagem {
-    private String arma:
+    private String arma;
 
     // Constructor da classe Guerreiro
     public Guerreiro(String nome, String arma) {
@@ -35,7 +35,7 @@ class Guerreiro extends Personagem {
 }
 // Classe derivada "Mago"
 class Mago extends Personagem {
-    private String magia:
+    private String magia;
 
     // Constructor da classe Mago
     public Mago(String nome, String magia) {
@@ -53,5 +53,21 @@ class Mago extends Personagem {
     @Override
     public void defender() {
         System.out.println(nome + " usa um escudo mágico para se defender!");
+    }
+}
+// Classe principal
+public class Main {
+    public static void main(String[] args) {
+        // Criando objetos/instâncias
+        // Personagem personagem = new Personagem("Invalido"); // Não é possivel instanciar
+
+        Guerreiro guerreiro = new Guerreiro("Thorin", "Espada");
+        guerreiro.atacar(); // Saída: "Thorin ataca com a Espada!"
+        guerreiro.defender(); // Saída: "Thorin levanta o escudo para se defender!"
+
+        Mago mago = new Mago("Gandalf", "Bola de Fogo");
+        mago.atacar(); // Saída: "Gandalf lança a magia Bola de Fogo!"
+        mago.defender(); // Saída: "Gandalf usa um escudo mágico para se defender!"
+    
     }
 }
