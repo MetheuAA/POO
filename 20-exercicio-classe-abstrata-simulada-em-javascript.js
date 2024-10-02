@@ -20,7 +20,7 @@ class Jogo {
     classe,
     magia,
     arma,
-    habilidadeEspecial,
+    habilidadeEspecial
   ) {
     this.#nome = nome;
     this.#vida = vida;
@@ -94,9 +94,20 @@ class Jogo {
   set habilidadeEspecial(habilidadeEspecial) {
     this.#habilidadeEspecial = habilidadeEspecial;
   }
-  atacar() {
-    console.log(`${this.#nome} realizou um ataque`);
+  atacar(...args) {
+    if (args.length === 0) {
+      console.log(`${this.nome} realizou um ataque normal!`);
+    } else if (args.length === 1) {
+      console.log(`${this.#nome} atacou com um poder de ${args[0]}!}`);
+    } else if (args.length === 2) {
+      console.log(
+        `${this.#nome} usou ${args[1]} e atacou com ${args[0]} de poder!`
+      );
+    } else {
+      console.log("Número invalido de argumentos.");
+    }
   }
+
   defender() {
     console.log(`${this.#nome} realizou um defesa`);
   }
@@ -104,7 +115,9 @@ class Jogo {
     console.log(`${this.#nome} realizou um ataque utilizando magia`);
   }
   ganharExperiencia() {
-    console.log(`${this.#nome} ganhou experiência e subiu seu nível para ${this.nivel}`);
+    console.log(
+      `${this.#nome} ganhou experiência e subiu seu nível para ${this.nivel}`
+    );
   }
 }
 
@@ -336,7 +349,7 @@ class Ladino extends Jogo {
 }
 
 const guerreiro = new Guerreiro(
-    "Thor",
+    "guerreiro",
     100,
     70,
     50,
@@ -354,7 +367,7 @@ guerreiro.gritarGuerra();
 guerreiro.atacar(30);
 
 const mago = new Mago(
-    "Loki",
+    "mago",
     100,
     30,
     50,
@@ -372,7 +385,7 @@ mago.invocar();
 mago.usarMagia(40);
 
 const arqueiro = new Arqueiro(
-    "Ashe",
+    "arqueiro",
     100,
     10,
     30,
@@ -389,7 +402,7 @@ arqueiro.atirarFlecha();
 arqueiro.info();
 
 const ladino = new Ladino(
-    "Josh",
+    "ladino",
     100,
     60,
     40,
@@ -404,3 +417,32 @@ const ladino = new Ladino(
   );
 ladino.desaparecer();
 ladino.defender();
+
+console.log("----------------------------------------------------------------");
+console.log("Modificando os objetos usando setters:");
+console.log("----------------------------------------------------------------");
+
+//Modificando o objeto guerreiro usando setters 
+guerreiro.nome = "Thorfinn";
+console.log(`Nome modificado: ${guerreiro.nome}`);
+guerreiro.atacar();
+
+//Modificando o objeto arqueiro usando setters
+
+arqueiro.nome = "Hakuna Matata";
+console.log(`Nome modificado: ${arqueiro.nome}`);
+arqueiro.atirarFlecha();
+
+//Modificando o objeto ladino usando setters
+
+ladino.nome = "Thunderbolt";
+console.log(`Nome modificado: ${ladino.nome}`);
+ladino.defender();
+
+//Modificando o objeto mago usando setters
+
+mago.nome = "Lumina";
+console.log(`Nome modificado: ${mago.nome}`);
+mago.usarMagia(60);
+
+
