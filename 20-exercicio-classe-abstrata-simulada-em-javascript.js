@@ -1,4 +1,3 @@
-//forca base Carros
 class Jogo {
   #nome;
   #vida;
@@ -22,6 +21,11 @@ class Jogo {
     arma,
     habilidadeEspecial
   ) {
+    if (new.target === Jogo) {
+      throw new Error(
+        "Não é possível instanciar a classe abstrata Jogo diretamente"
+      );
+    }
     this.#nome = nome;
     this.#vida = vida;
     this.#forca = forca;
@@ -94,17 +98,11 @@ class Jogo {
   set habilidadeEspecial(habilidadeEspecial) {
     this.#habilidadeEspecial = habilidadeEspecial;
   }
-  atacar(...args) {
-    if (args.length === 0) {
+   atacar(dano, tipoAtaque) {
+    if (tipoAtaque === "undefined") {
       console.log(`${this.nome} realizou um ataque normal!`);
-    } else if (args.length === 1) {
-      console.log(`${this.#nome} atacou com um poder de ${args[0]}!}`);
-    } else if (args.length === 2) {
-      console.log(
-        `${this.#nome} usou ${args[1]} e atacou com ${args[0]} de poder!`
-      );
     } else {
-      console.log("Número invalido de argumentos.");
+      console.log(`${this.nome} atacou com um poder de ${dano} usando ${tipoAtaque}!`);
     }
   }
 
@@ -148,7 +146,7 @@ class Guerreiro extends Jogo {
       classe,
       magia,
       arma,
-      habilidadeEspecial,
+      habilidadeEspecial
     );
     this.#armadura = armadura;
     this.#potenciaAtaque = potenciaAtaque;
@@ -205,7 +203,7 @@ class Mago extends Jogo {
       classe,
       magia,
       arma,
-      habilidadeEspecial,
+      habilidadeEspecial
     );
     this.#nivelMagia = nivelMagia;
     this.#elemento = elemento;
@@ -237,7 +235,7 @@ class Mago extends Jogo {
 
 class Arqueiro extends Jogo {
   #tipoArco;
-  #precisao
+  #precisao;
   constructor(
     nome,
     vida,
@@ -251,7 +249,7 @@ class Arqueiro extends Jogo {
     habilidadeEspecial,
     tipoArco,
     precisao
-) {
+  ) {
     super(
       nome,
       vida,
@@ -262,13 +260,12 @@ class Arqueiro extends Jogo {
       classe,
       magia,
       arma,
-      habilidadeEspecial,
+      habilidadeEspecial
     );
     this.#tipoArco = tipoArco;
     this.#precisao = precisao;
   }
-  get tipoArco(
-  ) {
+  get tipoArco() {
     return this.#tipoArco;
   }
   set tipoArco(tipoArco) {
@@ -281,21 +278,22 @@ class Arqueiro extends Jogo {
     this.#precisao = precisao;
   }
   atirarFlecha() {
-    console.log(`${this.nome} destruiu varios inimigo com sua poderosa flecha em seu arco`
+    console.log(
+      `${this.nome} destruiu varios inimigo com sua poderosa flecha em seu arco`
     );
   }
 
   info() {
-       console.log(`${this.nome}`);
-       console.log(`${this.vida}`);
-       console.log(`${this.arma}`);
-       console.log(`${this.tipoArco}`);
+    console.log(`${this.nome}`);
+    console.log(`${this.vida}`);
+    console.log(`${this.arma}`);
+    console.log(`${this.tipoArco}`);
   }
-}   
+}
 
 class Ladino extends Jogo {
   #habilidadeFurtiva;
-  #agilidade
+  #agilidade;
   constructor(
     nome,
     vida,
@@ -309,7 +307,7 @@ class Ladino extends Jogo {
     habilidadeEspecial,
     habilidadeFurtiva,
     agilidade
-) {
+  ) {
     super(
       nome,
       vida,
@@ -320,13 +318,12 @@ class Ladino extends Jogo {
       classe,
       magia,
       arma,
-      habilidadeEspecial,
+      habilidadeEspecial
     );
     this.#habilidadeFurtiva = habilidadeFurtiva;
     this.#agilidade = agilidade;
   }
-  get habilidadeFurtiva(
-  ) {
+  get habilidadeFurtiva() {
     return this.#habilidadeFurtiva;
   }
   set habilidadeFurtiva(habilidadeFurtiva) {
@@ -339,82 +336,54 @@ class Ladino extends Jogo {
     this.#agilidade = agilidade;
   }
   desaparecer() {
-    console.log(`${this.nome} desaparece com sua incrivel furtividade`
-    );
+    console.log(`${this.nome} desaparece com sua incrivel furtividade`);
   }
 
   defender() {
-       console.log(`${this.nome} realiza uma defesa com seu escudo abençoado`);
+    console.log(`${this.nome} realiza uma defesa com seu escudo abençoado`);
   }
 }
 
 const guerreiro = new Guerreiro(
-    "guerreiro",
-    100,
-    70,
-    50,
-    10,
-    50,
-    45,
-    20,
-    10,
-    30,
-    0,
-    50,
-    20
-  );
+  "guerreiro",
+  100,
+  70,
+  50,
+  10,
+  50,
+  45,
+  20,
+  10,
+  30,
+  0,
+  50,
+  20
+);
 guerreiro.gritarGuerra();
 guerreiro.atacar(30);
 
-const mago = new Mago(
-    "mago",
-    100,
-    30,
-    50,
-    20,
-    40,
-    15,
-    25,
-    40,
-    35,
-    0,
-    50,
-    10
-  );
+const mago = new Mago("mago", 100, 30, 50, 20, 40, 15, 25, 40, 35, 0, 50, 10);
 mago.invocar();
 mago.usarMagia(40);
 
 const arqueiro = new Arqueiro(
-    "arqueiro",
-    100,
-    10,
-    30,
-    80,
-    100,
-    20,
-    0,
-    "arco",
-    "flechaDivina",
-    "flamejante",
-    100
-)
+  "arqueiro",
+  100,
+  10,
+  30,
+  80,
+  100,
+  20,
+  0,
+  "arco",
+  "flechaDivina",
+  "flamejante",
+  100
+);
 arqueiro.atirarFlecha();
 arqueiro.info();
 
-const ladino = new Ladino(
-    "ladino",
-    100,
-    60,
-    40,
-    10,
-    50,
-    30,
-    20,
-    15,
-    50,
-    0,
-    80
-  );
+const ladino = new Ladino("ladino", 100, 60, 40, 10, 50, 30, 20, 15, 50, 0, 80);
 ladino.desaparecer();
 ladino.defender();
 
@@ -422,10 +391,10 @@ console.log("----------------------------------------------------------------");
 console.log("Modificando os objetos usando setters:");
 console.log("----------------------------------------------------------------");
 
-//Modificando o objeto guerreiro usando setters 
+//Modificando o objeto guerreiro usando setters
 guerreiro.nome = "Thorfinn";
 console.log(`Nome modificado: ${guerreiro.nome}`);
-guerreiro.atacar();
+guerreiro.atacar(30);
 
 //Modificando o objeto arqueiro usando setters
 
@@ -444,5 +413,3 @@ ladino.defender();
 mago.nome = "Lumina";
 console.log(`Nome modificado: ${mago.nome}`);
 mago.usarMagia(60);
-
-
